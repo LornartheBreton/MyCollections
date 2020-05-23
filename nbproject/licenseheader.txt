@@ -1,0 +1,7 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Copyright Hector G. T. Torres 2020
+<#if licenseLast??>
+${licenseLast}
+</#if>
