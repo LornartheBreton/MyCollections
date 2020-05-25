@@ -4,6 +4,7 @@
 package mx.itam.com111020_02.collections.impl.linked;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Abstract class for Collections utilizing linear linked structures.
@@ -112,7 +113,7 @@ public abstract class LinkedCollection<E> implements Collection<E>{
      * @param newElement The element to be removed.
      * @return true if the operation was successful. false if otherwise.
      */
-    public boolean removeElement(E newElement){
+    public boolean removeElement(Object newElement){
         boolean ans=false;
         
         if(newElement!=null){
@@ -140,7 +141,13 @@ public abstract class LinkedCollection<E> implements Collection<E>{
         
         return ans;
     }
-    public boolean findElement(E element){
+    /**
+     * Determines whether or not the Collection contains an element.
+     * 
+     * @param element The element to process.
+     * @return true if the Collection contains the element. false if it doesn't.
+     */
+    public boolean findElement(Object element){
         boolean ans=false;
         
         if(element!=null){
@@ -158,4 +165,118 @@ public abstract class LinkedCollection<E> implements Collection<E>{
         }
         return ans;
     }
+    /**
+     * Empties the Collection.
+     */
+    @Override
+    public void clear(){
+        first=null;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int size() {
+        return elements;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEmpty() {
+        return first==null;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean contains(Object o) {
+        return findElement(o);
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>(){
+            Node<E> current=first;
+            
+            @Override
+            public boolean hasNext(){
+                return current!=null;
+            }
+
+            @Override
+            public E next() {
+                E element=current.getData();
+                
+                current=current.getNext();
+                
+                return element;
+            }
+            
+        };
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public abstract Object[] toArray();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public abstract <T> T[] toArray(T[] a);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public abstract boolean add(E e);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean remove(Object o) {
+        return removeElement(o);
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        if(c==null||c.isEmpty()){
+            return false;
+        }
+        for(Object e: c){
+            if(!contains(e)){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        int size=elements;
+        
+        for(E e: c){
+            add(e);
+        }
+        
+        return size==elements;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public abstract boolean removeAll(Collection<?> c);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public abstract boolean retainAll(Collection<?> c);
+    
 }

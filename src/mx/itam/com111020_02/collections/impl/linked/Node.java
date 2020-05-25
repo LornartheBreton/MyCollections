@@ -37,19 +37,35 @@ public class Node<E> {
         this.data=data;
         this.next=next;
     }
-
+    /**
+     * Returns the data in the Node.
+     * 
+     * @return the data 
+     */
     public E getData() {
         return data;
     }
-
+    /**
+     * Sets the data in the Node.
+     * 
+     * @param data the data
+     */
     public void setData(E data) {
         this.data = data;
     }
-
+    /**
+     * Returns the next Node.
+     * 
+     * @return the next Node
+     */
     public Node<E> getNext() {
         return next;
     }
-
+    /**
+     * Sets the next Node.
+     * 
+     * @param next the next Node
+     */
     public void setNext(Node<E> next) {
         this.next = next;
     }
